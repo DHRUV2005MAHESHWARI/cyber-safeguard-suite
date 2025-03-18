@@ -1,6 +1,5 @@
-
 import React from 'react';
-import { Activity, RefreshCw, Shield, AlertTriangle, X, Cpu, Memory, HardDrive, Battery, Thermometer, Server } from 'lucide-react';
+import { Activity, RefreshCw, Shield, AlertTriangle, X, Cpu, Database, HardDrive, Battery, Thermometer, Server } from 'lucide-react';
 import { useSecurity } from '@/context/SecurityContext';
 import { useSystemMonitor } from '@/hooks/useSystemMonitor';
 import CardContainer from '@/components/CardContainer';
@@ -34,7 +33,6 @@ const SystemMonitor = () => {
     }
   };
   
-  // Sample performance data for chart
   const performanceData = [
     { time: '2m ago', cpu: 15, memory: 40 },
     { time: '1.5m ago', cpu: 25, memory: 42 },
@@ -103,7 +101,7 @@ const SystemMonitor = () => {
                     <div>
                       <div className="flex justify-between mb-1">
                         <div className="flex items-center gap-2">
-                          <Memory className="w-4 h-4 text-purple-500" />
+                          <Database className="w-4 h-4 text-purple-500" />
                           <span className="text-sm">Memory Usage</span>
                         </div>
                         <span className="text-sm font-medium">{systemInfo.memoryUsage}%</span>
