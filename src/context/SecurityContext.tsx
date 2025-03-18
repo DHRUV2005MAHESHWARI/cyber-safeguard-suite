@@ -1,5 +1,6 @@
 
 import React, { createContext, useContext, useReducer, ReactNode, useEffect } from 'react';
+import { useMobileDevice } from '@/hooks/useMobileDevice';
 
 // Types
 export type SecurityStatus = 'secure' | 'warning' | 'critical' | 'scanning';
@@ -11,6 +12,7 @@ interface SecurityState {
   passwordStatus: SecurityStatus;
   systemStatus: SecurityStatus;
   isScanning: boolean;
+  isMobileDevice: boolean;
 }
 
 type SecurityAction = 
@@ -20,6 +22,7 @@ type SecurityAction =
   | { type: 'SET_PASSWORD_STATUS'; payload: SecurityStatus }
   | { type: 'SET_SYSTEM_STATUS'; payload: SecurityStatus }
   | { type: 'SET_SCANNING'; payload: boolean }
+  | { type: 'SET_IS_MOBILE_DEVICE'; payload: boolean }
   | { type: 'RESET_STATE' };
 
 interface SecurityContextType extends SecurityState {
@@ -38,6 +41,7 @@ const initialState: SecurityState = {
   passwordStatus: 'scanning',
   systemStatus: 'scanning',
   isScanning: false,
+  isMobileDevice: false,
 };
 
 // Reducer
@@ -55,6 +59,8 @@ const securityReducer = (state: SecurityState, action: SecurityAction): Security
       return { ...state, systemStatus: action.payload };
     case 'SET_SCANNING':
       return { ...state, isScanning: action.payload };
+    case 'SET_IS_MOBILE_DEVICE':
+      return { ...state, isMobileDevice: action.payload };
     case 'RESET_STATE':
       return initialState;
     default:
@@ -67,7 +73,13 @@ const SecurityContext = createContext<SecurityContextType | undefined>(undefined
 
 // Provider component
 export const SecurityProvider = ({ children }: { children: ReactNode }) => {
+  const { isMobile } = useMobileDevice();
   const [state, dispatch] = useReducer(securityReducer, initialState);
+
+  // Update mobile device status
+  useEffect(() => {
+    dispatch({ type: 'SET_IS_MOBILE_DEVICE', payload: isMobile });
+  }, [isMobile]);
 
   // Calculate overall security score based on individual statuses
   const calculateOverallScore = () => {
