@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Activity, RefreshCw } from 'lucide-react';
+import { Activity, RefreshCw, Shield, Lock, Zap } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import StatusBadge from '@/components/StatusBadge';
 import { SecurityStatus } from '@/context/SecurityContext';
@@ -20,8 +20,23 @@ const SystemMonitorHeader = ({ systemStatus, isScanning, startScan }: SystemMoni
           System Monitor
         </h1>
         <p className="text-muted-foreground">
-          Track system performance and security status.
+          Track system performance, security, and optimize your device.
         </p>
+        
+        <div className="flex gap-6 mt-4">
+          <div className="flex items-center gap-2 text-sm text-muted-foreground">
+            <Shield className="w-4 h-4 text-primary" />
+            Security Tools
+          </div>
+          <div className="flex items-center gap-2 text-sm text-muted-foreground">
+            <Lock className="w-4 h-4 text-primary" />
+            Password Checker
+          </div>
+          <div className="flex items-center gap-2 text-sm text-muted-foreground">
+            <Zap className="w-4 h-4 text-primary" />
+            Performance Boost
+          </div>
+        </div>
       </div>
       
       <div className="flex items-center gap-4">

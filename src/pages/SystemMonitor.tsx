@@ -7,6 +7,9 @@ import SystemMonitorHeader from '@/components/system/SystemMonitorHeader';
 import SystemResourcesCard from '@/components/system/SystemResourcesCard';
 import PerformanceChart from '@/components/system/PerformanceChart';
 import SecurityIssuesList from '@/components/system/SecurityIssuesList';
+import PasswordStrengthChecker from '@/components/password/PasswordStrengthChecker';
+import VulnerabilityScanner from '@/components/system/VulnerabilityScanner';
+import PerformanceBooster from '@/components/system/PerformanceBooster';
 import LoadingState from '@/components/system/LoadingState';
 
 const SystemMonitor = () => {
@@ -43,6 +46,14 @@ const SystemMonitor = () => {
               securityIssues={securityIssues}
               resolveIssue={resolveIssue}
             />
+            
+            {/* New Components */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <PasswordStrengthChecker />
+              <PerformanceBooster />
+            </div>
+            
+            <VulnerabilityScanner />
           </div>
         ) : (
           <LoadingState isScanning={isScanning} />
